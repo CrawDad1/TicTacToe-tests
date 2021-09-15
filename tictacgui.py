@@ -4,7 +4,6 @@ from tkinter.constants import DISABLED
 from typing import Text
 
 #set global variable Turn state
-
 Turn_State=['X',9]
 
 def UpdateState():
@@ -16,8 +15,7 @@ def UpdateState():
         Turn_State[0]='X'
 
 def CheckBoard(btn_list):
-    global Turn_State
-
+    
     #horizontal
     if btn_list[0]['text'] == btn_list[1]['text'] == btn_list[2]['text']:
         return True
@@ -40,8 +38,6 @@ def CheckBoard(btn_list):
     elif btn_list[2]['text'] == btn_list[4]['text'] == btn_list[6]['text']:
         return True
     
-    if Turn_State[1]<=0:
-        return True
 
     return False
         
@@ -54,12 +50,11 @@ def BoardClick(btn : tk.Button):
     Turn_State[1]-=1    
     print(Turn_State)
     if CheckBoard(btn_list) is True:
-        if Turn_State[1] > 0:
-            lbl1['text']=("Sorry, this game's a draw")
-        elif Turn_State[1] <=0:
-            for i in btn_list:
-                i['state']=DISABLED
+        for i in btn_list:
+            i['state']=DISABLED
             lbl1['text']=(f"The Winner is: {btn['text']}")
+    elif Turn_State[1] <=0:
+            lbl1['text']=("DRAW!")
     
 def GenerateButtons(_master,):
     btn_list=list()
@@ -75,13 +70,13 @@ def GenerateButtons(_master,):
     return btn_list
 
 def fClose(num):
+    #workaround for me not understanding tkinter
     if num == -1:
         exit()
 
 Main_Window = tk.Tk()
 background = tk.Frame(master=Main_Window,background='gray')
 Frame1=tk.Frame(master=background,background='gray',relief="raised", padx=5,pady=2,border=10)
-#Frame1.tk_bisque()
 lbl1=tk.Label(master = background,wraplength=400,background= 'gray', text="Let's play some\nTic-Tac-Toe!", font=("arial", 25),padx=10,pady=10)
 btn_close=tk.Button(master = background,background= 'gray',text="CLOSE!", font=("arial", 25), command= (lambda arg1 = -1: fClose(arg1)))
 
@@ -90,10 +85,7 @@ btn_close=tk.Button(master = background,background= 'gray',text="CLOSE!", font=(
 background.pack(fill='both')
 Frame1.pack()
 btn_list = GenerateButtons(Frame1)
-
 lbl1.pack()
 btn_close.pack()
-
-
 
 Main_Window.mainloop()
