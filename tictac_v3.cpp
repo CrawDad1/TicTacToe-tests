@@ -319,12 +319,14 @@ void PlayGame(){
         cout << "where will you move?";        
         GetCoord(x, y);
         SetCell(Board, 'X', x, y, MovesLeft);
+        PrintBoard(Board);
         win =CheckBoard(Board, MovesLeft);
         if(win) break;        
         
-        auto oMove = treeMove(Board);
+        auto oMove = CheckBoard2(Board, MovesLeft);
         y=oMove.first;
         x=oMove.second;
+        std::cout << "Player O moves to... " << (y*3)+x+1 << std::endl;
         SetCell(Board, 'O', x, y, MovesLeft);
         PrintBoard(Board);
         win =CheckBoard(Board, MovesLeft);
@@ -413,42 +415,46 @@ bool CheckBoard(const vector<vector<char>> &Board, const int &MovesLeft){
 std::pair<unsigned, unsigned> CheckBoard2(const vector<vector<char>> &Board, const int &MovesLeft){    
 
     //checks for boards where x has a connect 2
-    //might work better if i just use the tree instead? 
-    return treeMove(Board);
+    std::pair<unsigned, unsigned> move;
 
     //horizontal
     for(unsigned i{0}; i < Board.size(); ++i)
     {        
-        if ((Board[i][0]=='x')&&(Board[i][0]==Board[i][1])) return {i, 2};
-        else if ((Board[i][0]=='x')&&(Board[i][0])==(Board[i][2])) return {i, 1};
-        else if ((Board[i][1]=='x')&&(Board[i][1])==(Board[i][2])) return {i, 0};
+        if ((Board[i][0]=='X')&&(Board[i][0]==Board[i][1])) move = {i, 2};
+        else if ((Board[i][0]=='X')&&(Board[i][0])==(Board[i][2])) move = {i, 1};
+        else if ((Board[i][1]=='X')&&(Board[i][1])==(Board[i][2])) move = {i, 0};
+
+        if (isdigit(Board[move.first][move.second])) return move;
+        // else continue checking
     }
     //vertical
     for(unsigned i{0}; i < Board.size(); ++i)
     {
-        if ((Board[0][i]=='x')&&(Board[0][i]==Board[1][i])) return {2, i};
-        else if ((Board[0][i]=='x')&&(Board[0][i]==Board[2][i])) return {1, i};
-        else if ((Board[1][i]=='x')&&(Board[1][i]==Board[2][i])) return {0, i};
+        if ((Board[0][i]=='X')&&(Board[0][i]==Board[1][i])) move = {2, i};
+        else if ((Board[0][i]=='X')&&(Board[0][i]==Board[2][i])) move = {1, i};
+        else if ((Board[1][i]=='X')&&(Board[1][i]==Board[2][i])) move = {0, i};
+
+        if (isdigit(Board[move.first][move.second])) return move;
+        //else continue checking. 
     }
 
     // 2 diagonal       
         //top left
-        if ((Board[0][0] == 'x')&&(Board[0][0]==Board[1][1])) return {2,2};
-        else if ((Board[0][0] == 'x')&&(Board[0][0]==Board[2][2])) return {1,1};
-        else if ((Board[1][1] == 'x')&&(Board[1][1]==Board[2][2])) return {0,0};
+        if ((Board[0][0] == 'X')&&(Board[0][0]==Board[1][1])) move = {2,2};
+        else if ((Board[0][0] == 'X')&&(Board[0][0]==Board[2][2])) move = {1,1};
+        else if ((Board[1][1] == 'X')&&(Board[1][1]==Board[2][2])) move = {0,0};
+
+        if (isdigit(Board[move.first][move.second])) return move;
 
         //bottom left
-        if ((Board[2][0] == 'x')&&(Board[2][0]==Board[1][1])) return {0,2};
-        else if ((Board[2][0] == 'x')&&(Board[2][0]==Board[0][2])) return {1,1};
-        else if ((Board[1][1] == 'x')&&(Board[1][1]==Board[0][2])) return {2,0};
+        if ((Board[2][0] == 'X')&&(Board[2][0]==Board[1][1])) move = {0,2};
+        else if ((Board[2][0] == 'X')&&(Board[2][0]==Board[0][2])) move = {1,1};
+        else if ((Board[1][1] == 'X')&&(Board[1][1]==Board[0][2])) move = {2,0};
+
+        if (isdigit(Board[move.first][move.second])) return move;
 
 
-
-        
-    
-   
-
-    // no set of two, pick from tree ? 
+    // check if valid, otherwise move using tree. 
     return treeMove(Board);
 }
 
