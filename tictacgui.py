@@ -1,4 +1,5 @@
 from os import makedirs
+import string
 import tkinter as tk
 from tkinter import Tk, font, mainloop
 from tkinter.constants import DISABLED, N, S
@@ -6,6 +7,19 @@ from typing import Text
 
 #set global variable Turn state
 Turn_State=['X',9]
+
+def BoardString(btn_List)-> str:
+    sBoard:str=""
+    
+    for i in range (9):
+        if str(btn_list[i]["text"]).isdigit():
+            sBoard+="e"
+        else:
+            sBoard+=str(btn_list[i]["text"]).lower()
+
+        
+    return sBoard
+
 
 def UpdateState():
     global Turn_State
@@ -50,6 +64,7 @@ def BoardClick(btn : tk.Button):
     btn.configure(text=Turn_State[0], state=DISABLED)
     UpdateState()    
     print(Turn_State)
+    print(BoardString(btn_list))
     if CheckBoard(btn_list) is True:
         for i in btn_list:
             i['state']=DISABLED
