@@ -3,3 +3,9 @@ TicTacTrees.exe
 TicTacTrees-mapped.exe
 TicTacTrees-unmapped.exe
 .vscode/tasks.json
+.vscode/launch.json
+vectortest.exe
+vectortest.cpp
+.vscode/launch.json
+TTTreeExplorer.cpp
+TTTreeExplorer.exe
