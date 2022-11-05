@@ -1,20 +1,11 @@
 
+UPDATE V4
 
+v3 was having unexpected math results, and the patchwork code was getting extremely messy. 
 
-
-currently runs only in console, may explore future options for GUI implementation
-
-
-
-Python version using tkinter GUI. buttons are procedurally generated objects using lambda function calls on button press. 
-
------------------------------------------------------------------------
-TicTacTrees update:
-attempt to build tic tac toe game tree, with relative wins in a given branch. 
-
-
-------------------------------------------------------------------------
-tictac_v3 now lets you play against the computer! It's currently stuck on hard, so don't expect to win without making the right moves. 
-
-
-
+V4 has been tidied up in visual studio
+--new features
+-you can now choose to play as either x or o against a computer, or play both parts! 
+-more stability! 
+-more consistant cpu behavior! 
+-more readable code! 

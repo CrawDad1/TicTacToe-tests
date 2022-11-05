@@ -9,3 +9,5 @@ vectortest.cpp
 .vscode/launch.json
 TTTreeExplorer.cpp
 TTTreeExplorer.exe
+TicTacToeV4/.vs
+TicTacToeV4/Debug
