@@ -1,3 +1,5 @@
+Todo: tidy up git
+
 UPDATE V5
 
 v4 was still having issues making the correct move
@@ -11,6 +13,7 @@ v4 was still having issues making the correct move
 
 planned for V6
     -selectable difficulty
+
 
 UPDATE V4
 
